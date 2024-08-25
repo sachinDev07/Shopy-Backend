@@ -32,10 +32,11 @@ const productSchema = new mongoose.Schema(
       },
     ],
     category: {
-        type: String,
-        required: true,
-        enum: ["Electronics", "Clothes", "Books","Phones", "Laptops", "Other"]
-    }
+      type: String,
+      required: true,
+      enum: ["Electronics", "Clothes", "Books", "Phones", "Laptops", "Other"],
+      default: "Other",
+    },
   },
   {
     timestamps: true,

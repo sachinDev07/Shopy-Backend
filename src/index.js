@@ -18,7 +18,7 @@ app.use(
   }),
 );
 
-app.use("api/v1/products", productRouter);
+app.use("/api/v1/products", productRouter);
 
 connectDB()
   .then(() => {
