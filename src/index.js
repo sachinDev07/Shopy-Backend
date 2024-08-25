@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./db/db");
+const productRouter = require("./routes/product-routes")
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.use(
     allowedHeaders: ["Content-Type"],
   }),
 );
+
+app.use("api/v1/products", productRouter);
 
 connectDB()
   .then(() => {
