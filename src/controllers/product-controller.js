@@ -1,7 +1,7 @@
 const Product = require("../models/product");
 const uploadOnCloudinary = require("../utils/cloudinary");
 
-async function createProduct(req, res) {  
+async function createProduct(req, res) {
   try {
     const productImageLocalPath = req.file?.path;
     if (!productImageLocalPath) {
@@ -36,6 +36,32 @@ async function createProduct(req, res) {
   }
 }
 
+async function getAllProducts(req, res) {
+  try {
+    const products = await Product.find();
+    if (products.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No products found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "All products found successfully",
+      length: products.length,
+      products,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while searching for the products",
+    });
+  }
+}
+
 module.exports = {
   createProduct,
+  getAllProducts,
 };
