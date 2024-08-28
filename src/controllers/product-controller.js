@@ -61,7 +61,34 @@ async function getAllProducts(req, res) {
   }
 }
 
+async function getFilteredData(req, res) {
+  try {
+    const { category } = req.body;
+    const products = await Product.find({ category });
+    if (products.length === 0) {
+      return res.status(200).json({
+        success: false,
+        message: "No products are found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Successfully found the products",
+      length: products.length,
+      products,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while searching for the products",
+    });
+  }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
+  getFilteredData,
 };

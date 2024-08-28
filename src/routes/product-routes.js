@@ -1,5 +1,5 @@
 const express = require("express");
-const { createProduct, getAllProducts } = require("../controllers/product-controller");
+const { createProduct, getAllProducts, getFilteredData } = require("../controllers/product-controller");
 const {
   validateCreateProductRequest,
 } = require("../middlewares/product-middlewares");
@@ -15,5 +15,7 @@ router.post(
 );
 
 router.get("/", getAllProducts);
+
+router.post("/filter", getFilteredData);
 
 module.exports = router;
