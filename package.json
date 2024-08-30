@@ -1,10 +1,10 @@
 {
   "name": "shopy-backend",
   "version": "1.0.0",
-  "main": "./src/index.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon ./src/index.js",
-    "start": "node ./src/index.js"
+    "dev": "npx nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
