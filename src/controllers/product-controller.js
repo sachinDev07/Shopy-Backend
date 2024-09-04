@@ -61,6 +61,35 @@ async function getAllProducts(req, res) {
   }
 }
 
+async function getProduct(req, res) {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      throw new Error("Product id is missing!");
+    }
+
+    const product = await Product.findById(id);
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found!",
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: "Successfully found the product",
+      product,
+    });
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong!",
+    });
+  }
+}
+
 async function getFilteredData(req, res) {
   try {
     const { category } = req.body;
@@ -90,5 +119,6 @@ async function getFilteredData(req, res) {
 module.exports = {
   createProduct,
   getAllProducts,
+  getProduct,
   getFilteredData,
 };
